@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'models/example2.dart';
+import '../models/example2.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});

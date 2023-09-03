@@ -1,8 +1,8 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
-import 'homepage.dart';
-import 'page_2.dart';
+import 'screens/homepage.dart';
+import 'screens/page_2.dart';
 
 void main() => runApp(const MyApp());
 
