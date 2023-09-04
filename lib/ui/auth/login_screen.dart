@@ -18,6 +18,18 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: const Text(
+          'Firebase Login / Register',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -25,15 +37,6 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Firebase Login / Register',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 60),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
@@ -44,8 +47,10 @@ class _LoginState extends State<Login> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter an Email Id';
+                    } else if (value.contains('@')) {
+                      return null;
                     }
-                    return null;
+                    return "Enter a valid Email Id.";
                   },
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -83,16 +88,21 @@ class _LoginState extends State<Login> {
                     Colors.deepPurpleAccent,
                   ),
                 ),
-                onPressed: () async {
-                  if (emailController.text.isNotEmpty &&
-                      passwordController.text.isNotEmpty) {
-                  } else {
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Empty text.'),
+                        content: Text('Great!'),
                         backgroundColor: Colors.yellowAccent,
                       ),
                     );
+                  } else {
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(
+                    //     content: Text('Empty text.'),
+                    //     backgroundColor: Colors.yellowAccent,
+                    //   ),
+                    // );
                   }
                 },
                 child: const Text(

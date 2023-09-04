@@ -4,11 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 
 class ImageUploadScreen extends StatefulWidget {
+  const ImageUploadScreen({super.key});
+
   @override
-  _ImageUploadScreenState createState() => _ImageUploadScreenState();
+  ImageUploadScreenState createState() => ImageUploadScreenState();
 }
 
-class _ImageUploadScreenState extends State<ImageUploadScreen> {
+class ImageUploadScreenState extends State<ImageUploadScreen> {
   final String apiUrl = "https://www251.ucdn.to/cgi-bin/upload.cgi";
 
   Future<void> uploadAssetFile() async {
