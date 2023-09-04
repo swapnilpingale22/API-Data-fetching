@@ -96,14 +96,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: Colors.yellowAccent,
                       ),
                     );
-                  } else {
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(
-                    //     content: Text('Empty text.'),
-                    //     backgroundColor: Colors.yellowAccent,
-                    //   ),
-                    // );
-                  }
+                  } else {}
                 },
                 child: const Text(
                   'Sign Up',
