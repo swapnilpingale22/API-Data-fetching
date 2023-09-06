@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, brightness: Brightness.dark),
       title: "Api Practice",
-      home: const SplashScreen(),
+      home: SplashScreen(),
       //  PageView(
       //   physics: const BouncingScrollPhysics(),
       //   children: const [
