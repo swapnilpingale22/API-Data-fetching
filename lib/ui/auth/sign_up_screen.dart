@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/ui/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:portfolio_app/ui/auth/post_screen.dart';
 
 import '../../widgets/toast.dart';
 
@@ -42,20 +42,19 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         loading = false;
       });
-      Widgets.showToast('Succeed');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PostScreen(),
+        ),
+      );
+      Widgets.showToast('Succeed', Colors.green);
     }).onError((error, stackTrace) {
       setState(() {
         loading = false;
       });
-      Widgets.showToast(error.toString());
+      Widgets.showToast(error.toString(), Colors.red);
     });
-
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text('Great! Account created.'),
-    //     backgroundColor: Colors.yellowAccent,
-    //   ),
-    // );
   }
 
   @override

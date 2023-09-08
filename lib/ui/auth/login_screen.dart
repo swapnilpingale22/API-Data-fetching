@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:portfolio_app/ui/auth/post_screen.dart';
 
 import '../../widgets/toast.dart';
+import 'login_with_phone_screen.dart';
 import 'sign_up_screen.dart';
 
 class Login extends StatefulWidget {
@@ -28,17 +30,25 @@ class _LoginState extends State<Login> {
     });
     await _auth
         .signInWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
+      email: emailController.text,
+      password: passwordController.text,
+    )
         .then((value) {
       setState(() {
         loading = false;
       });
-      Widgets.showToast('Succeed');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PostScreen(),
+        ),
+      );
+      Widgets.showToast('Succeed', Colors.green);
     }).onError((error, stackTrace) {
       setState(() {
         loading = false;
       });
-      Widgets.showToast(error.toString());
+      Widgets.showToast(error.toString(), Colors.red);
     });
   }
 
@@ -167,6 +177,20 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 30),
+                    OutlinedButton(
+                      style: const ButtonStyle(
+                          fixedSize: MaterialStatePropertyAll(Size(200, 50))),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginWithPhone(),
+                          ),
+                        );
+                      },
+                      child: const Text("Login with phone"),
                     )
                   ],
                 ),
