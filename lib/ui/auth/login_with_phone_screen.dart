@@ -23,39 +23,38 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
     setState(() {
       isLoading = true;
     });
-    await auth
-        .verifyPhoneNumber(
-          phoneNumber: "+91${phoneNumberController.text}",
-          verificationCompleted: (phoneAuthCredential) {},
-          verificationFailed: (error) {
-            Widgets.showToast(error, Colors.red);
-          },
-          codeSent: (verificationId, forceResendingToken) {
-            setState(() {
-              isLoading = false;
-            });
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VerificationScreen(
-                    verificationId: verificationId,
-                  ),
-                ));
-          },
-          codeAutoRetrievalTimeout: (verificationId) {
-            setState(() {
-              isLoading = false;
-            });
-            Widgets.showToast(verificationId, Colors.red);
-          },
-        )
-        .then((value) {})
-        .onError((error, stackTrace) {
+    try {
+      await auth.verifyPhoneNumber(
+        phoneNumber: "+91${phoneNumberController.text}",
+        verificationCompleted: (phoneAuthCredential) {},
+        verificationFailed: (error) {
+          Widgets.showToast(error, Colors.red);
+        },
+        codeSent: (verificationId, forceResendingToken) {
+          setState(() {
+            isLoading = false;
+          });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VerificationScreen(
+                  verificationId: verificationId,
+                ),
+              ));
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          setState(() {
+            isLoading = false;
+          });
+          Widgets.showToast(verificationId, Colors.red);
+        },
+      );
+    } on FirebaseAuthException catch (e) {
       setState(() {
         isLoading = false;
       });
-      Widgets.showToast(error, Colors.red);
-    });
+      Widgets.showToast(e.message.toString(), Colors.red);
+    }
   }
 
   @override

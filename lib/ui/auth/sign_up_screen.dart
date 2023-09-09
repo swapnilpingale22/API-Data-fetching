@@ -33,28 +33,30 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       loading = true;
     });
-    await _auth
-        .createUserWithEmailAndPassword(
-      email: emailController.text.toString(),
-      password: passwordController.text.toString(),
-    )
-        .then((value) {
+    try {
+      await _auth
+          .createUserWithEmailAndPassword(
+        email: emailController.text.toString(),
+        password: passwordController.text.toString(),
+      )
+          .then((value) {
+        setState(() {
+          loading = false;
+        });
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostScreen(),
+          ),
+        );
+        Widgets.showToast('Succeed', Colors.green);
+      });
+    } on FirebaseAuthException catch (e) {
       setState(() {
         loading = false;
       });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PostScreen(),
-        ),
-      );
-      Widgets.showToast('Succeed', Colors.green);
-    }).onError((error, stackTrace) {
-      setState(() {
-        loading = false;
-      });
-      Widgets.showToast(error.toString(), Colors.red);
-    });
+      Widgets.showToast(e.message.toString(), Colors.red);
+    }
   }
 
   @override

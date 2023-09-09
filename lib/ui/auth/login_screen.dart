@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:portfolio_app/ui/auth/post_screen.dart';
 
 import '../../widgets/toast.dart';
+import 'forgot_pass_screen.dart';
 import 'login_with_phone_screen.dart';
 import 'sign_up_screen.dart';
 
@@ -28,28 +29,30 @@ class _LoginState extends State<Login> {
     setState(() {
       loading = true;
     });
-    await _auth
-        .signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    )
-        .then((value) {
+    try {
+      await _auth
+          .signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((value) {
+        setState(() {
+          loading = false;
+        });
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostScreen(),
+          ),
+        );
+        Widgets.showToast('Succeed', Colors.green);
+      });
+    } on FirebaseAuthException catch (e) {
       setState(() {
         loading = false;
       });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PostScreen(),
-        ),
-      );
-      Widgets.showToast('Succeed', Colors.green);
-    }).onError((error, stackTrace) {
-      setState(() {
-        loading = false;
-      });
-      Widgets.showToast(error.toString(), Colors.red);
-    });
+      Widgets.showToast(e.message.toString(), Colors.red);
+    }
   }
 
   @override
@@ -133,6 +136,29 @@ class _LoginState extends State<Login> {
                             hintText: 'Password',
                             prefixIcon: Icon(Icons.password)),
                       ),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Forgot your password?',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 60),
                     ElevatedButton(

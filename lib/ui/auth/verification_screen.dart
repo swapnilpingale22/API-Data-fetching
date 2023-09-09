@@ -41,11 +41,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
             ));
         Widgets.showToast('Success', Colors.green);
       });
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       setState(() {
         isLoading = false;
       });
-      Widgets.showToast(e.toString(), Colors.red);
+      Widgets.showToast(e.message.toString(), Colors.red);
     }
   }
 

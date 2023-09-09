@@ -19,9 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.deepPurple.shade400,
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Text(
           'Firebase App',
           style: TextStyle(
