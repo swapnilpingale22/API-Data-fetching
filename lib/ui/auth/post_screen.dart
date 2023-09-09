@@ -9,10 +9,25 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = auth.currentUser;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Posts'),
         actions: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              (user!.email == null)
+                  ? const SizedBox()
+                  : Text("id: ${user.email.toString()}"),
+              (user.phoneNumber == null)
+                  ? const SizedBox()
+                  : Text("Ph: ${user.phoneNumber.toString()}"),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: IconButton(
@@ -36,6 +51,13 @@ class PostScreen extends StatelessWidget {
             ),
           )
         ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [],
+        ),
       ),
     );
   }

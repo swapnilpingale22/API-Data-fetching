@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_app/ui/auth/verification_screen.dart';
-
 import '../../widgets/toast.dart';
 
 class LoginWithPhone extends StatefulWidget {

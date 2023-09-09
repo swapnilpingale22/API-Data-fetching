@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:portfolio_app/ui/auth/post_screen.dart';
 import '../../widgets/toast.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -20,7 +20,34 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   final auth = FirebaseAuth.instance;
 
-  void verifyUser(BuildContext context) async {}
+  void verifyUser(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
+    final authCredentials = PhoneAuthProvider.credential(
+      verificationId: widget.verificationId,
+      smsCode: codeController.text.toString(),
+    );
+
+    try {
+      await auth.signInWithCredential(authCredentials).then((value) {
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PostScreen(),
+            ));
+        Widgets.showToast('Success', Colors.green);
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      Widgets.showToast(e.toString(), Colors.red);
+    }
+  }
 
   @override
   void dispose() {
@@ -50,9 +77,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a verification code';
+                      return 'Please enter your verification code';
+                    } else if (value.length == 6) {
+                      return null;
                     }
-                    return null;
+                    return 'Enter a valid 6 digit code';
                   },
                   controller: codeController,
                   keyboardType: TextInputType.number,
