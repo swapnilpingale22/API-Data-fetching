@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "878578270597",
+    "firebase_url": "https://practice1-81bfb-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "practice1-81bfb",
     "storage_bucket": "practice1-81bfb.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "878578270597-1fj1ggll60kjbob0jkhkg7rep9a6du6m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smp.portfolio_app",
+            "certificate_hash": "59ac7af7b279363e08aec5df74307a40a40ac4ac"
+          }
+        },
         {
           "client_id": "878578270597-pa2t71hm0hg51hvki4teeo7dk6k5899s.apps.googleusercontent.com",
           "client_type": 3

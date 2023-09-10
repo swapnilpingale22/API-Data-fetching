@@ -70,4 +70,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //added
     implementation "com.google.firebase:firebase-bom:32.2.3"
+//added later
+    // implementation "com.google.firebase:firebase-database"
 }
