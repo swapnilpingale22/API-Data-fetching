@@ -26,21 +26,18 @@ class _AddPostsState extends State<AddPosts> {
   }
 
   Future addPost() async {
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
     try {
-      await ref
-          .child(
-        DateTime.now().millisecondsSinceEpoch.toString(),
-      )
-          .set({
+      await ref.child(id).set({
         "Post": postController.text.toString(),
-        "id": DateTime.now().millisecondsSinceEpoch.toString(),
+        "id": id,
       }).then((value) {
         Widgets.showToast(
           "Post Added",
           Colors.green,
         );
         postController.clear();
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => PostScreen(),
