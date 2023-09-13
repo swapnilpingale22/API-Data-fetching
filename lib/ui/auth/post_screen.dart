@@ -49,7 +49,7 @@ class _PostScreenState extends State<PostScreen> {
               onPressed: () async {
                 await auth.signOut().then(
                   (value) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Login(),
