@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../ui/auth/post_screen.dart';
 import '../ui/firestore/firestore_list_screen.dart';
+import '../ui/posts/upload_image.dart';
 
 class InitScreen extends StatefulWidget {
   const InitScreen({super.key});
@@ -17,6 +18,7 @@ class _InitScreenState extends State<InitScreen> {
       body: PageView(
         physics: const BouncingScrollPhysics(),
         children: [
+          const UploadImage(),
           const FirestoreListScreen(),
           PostScreen(),
         ],

@@ -171,9 +171,23 @@ class _PostScreenState extends State<PostScreen> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        tileColor: Colors.blueGrey,
+                        tileColor: Colors.teal,
                         title: Text(title),
                         subtitle: Text(id),
+                        shape: const Border(
+                          left: BorderSide(
+                            color: Colors.white,
+                          ),
+                          right: BorderSide(
+                            color: Colors.white,
+                          ),
+                          top: BorderSide(
+                            color: Colors.white,
+                          ),
+                          bottom: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     );
                   } else {
