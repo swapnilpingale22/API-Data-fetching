@@ -80,6 +80,7 @@ class _AddFirestoreDatascreenState extends State<AddFirestoreDatascreen> {
                         'Post Added',
                         Colors.green,
                       );
+                      Navigator.pop(context);
                     }).onError((error, stackTrace) {
                       setState(() {
                         isLoading = false;

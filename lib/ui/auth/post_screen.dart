@@ -28,7 +28,13 @@ class _PostScreenState extends State<PostScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Posts'),
+        title: Text(
+          '⚡ RealTime',
+          style: TextStyle(
+            color: Colors.yellow.shade700,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -99,13 +105,15 @@ class _PostScreenState extends State<PostScreen> {
                 query: ref,
                 defaultChild: const Text('Loading...'),
                 itemBuilder: (context, snapshot, animation, index) {
-                  final title = snapshot.child('Post').value.toString();
+                  final title =
+                      '${index + 1}.  ${snapshot.child('Post').value.toString()}';
+
                   final id = snapshot.child('id').value.toString();
                   if (searchController.text.isEmpty) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        tileColor: Colors.blueGrey,
+                        tileColor: Colors.teal,
                         title: Text(title),
                         subtitle: Text(id),
                         trailing: PopupMenuButton(
@@ -140,6 +148,20 @@ class _PostScreenState extends State<PostScreen> {
                               ),
                             ),
                           ],
+                        ),
+                        shape: const Border(
+                          left: BorderSide(
+                            color: Colors.white,
+                          ),
+                          right: BorderSide(
+                            color: Colors.white,
+                          ),
+                          top: BorderSide(
+                            color: Colors.white,
+                          ),
+                          bottom: BorderSide(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     );
