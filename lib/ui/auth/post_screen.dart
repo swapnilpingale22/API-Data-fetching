@@ -105,15 +105,17 @@ class _PostScreenState extends State<PostScreen> {
                 query: ref,
                 defaultChild: const Text('Loading...'),
                 itemBuilder: (context, snapshot, animation, index) {
-                  final title =
-                      '${index + 1}.  ${snapshot.child('Post').value.toString()}';
+                  final title = snapshot.child('Post').value.toString();
 
                   final id = snapshot.child('id').value.toString();
                   if (searchController.text.isEmpty) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        tileColor: Colors.teal,
+                        tileColor: Colors.deepPurple,
+                        leading: (title.contains('http'))
+                            ? Image.network(title)
+                            : null,
                         title: Text(title),
                         subtitle: Text(id),
                         trailing: PopupMenuButton(
@@ -171,7 +173,7 @@ class _PostScreenState extends State<PostScreen> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        tileColor: Colors.teal,
+                        tileColor: Colors.deepPurple,
                         title: Text(title),
                         subtitle: Text(id),
                         shape: const Border(
